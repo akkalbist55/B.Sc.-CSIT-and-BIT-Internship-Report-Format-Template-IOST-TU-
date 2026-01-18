@@ -1,0 +1,138 @@
+\documentclass[12pt,a4paper,oneside]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+% -------------------- Fonts & Language (XeLaTeX) ------------
+\usepackage{fontspec}        % Load fontspec first
+\usepackage[style=apa,backend=biber]{biblatex} % Now load biblatex
+% -------- Font settings (Times New Roman) --------
+\setmainfont{Times New Roman}
+% Line spacing
+\usepackage{setspace}
+\onehalfspacing
+
+\addbibresource{ref.bib}      % Add your .bib file
+% -------------------- Formatting --------------------
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{tocloft}
+\usepackage{etoolbox}
+\usepackage{ragged2e}
+\usepackage{subfiles}
+\justifying
+% -------------------- Coding Style --------------------
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings, breakable}
+
+\begin{document}
+% -------------------- Numbering --------------------
+\numberwithin{equation}{section}
+
+
+% -------------------- Numbering --------------------
+\numberwithin{equation}{section}
+\numberwithin{section}{chapter}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+
+% -------------------- Section Formatting --------------------% Adjust spacing for unnumbered chapters (\chapter*)
+\titlespacing*{\chapter}{0pt}{-1.0cm}{0.5cm}
+
+\titleformat{\chapter}[block]
+  {\centering\bfseries\Huge}
+  {Chapter \ \thechapter:}{1em}{}
+\titleformat{\section}[hang]
+  {\bfseries\Large}
+  {\thesection.}{1em}{}
+
+\titleformat{\subsection}[hang]
+  {\bfseries\large}
+  {\thesubsection.}{1em}{}
+% -------------------- Document --------------------
+% -------------------- Cover Page --------------------
+\pagenumbering{gobble} % No page number on cover
+\begin{titlepage}
+\centering
+\includegraphics[width=4cm,height=4cm]{logo.png}\\[1em]
+{\fontsize{14pt}{17pt}\selectfont\textbf{Tribhuvan University}}\\[0.4em]
+{\fontsize{12pt}{15pt}\selectfont\textbf{Institute of Science and Technology}}\\[0.5em]
+{\fontsize{18pt}{17pt}\selectfont\textbf{Amrit Campus}}\\[3em]
+{\large \textbf{Computer Vision Internship}}\\[0.3em]
+{\large \textbf{At}}\\[0.3em]
+{\large \textbf {IT from Himalayas - ITH} \\[2em]}
+{\large \textbf{Under the Supervision of}}\\[0.5em]
+{\large Mr. Akkal Bahadur Bist}\\
+{\large Department of Computer Science \& Information Technology}\\
+{\large Amrit Campus, Thamel, Kathmandu}\\[2em]
+{\large In partial fulfillment of the requirements for the Bachelor of Science in Computer Science and Information Technology (B.Sc. CSIT) of Tribhuvan University}\\[2em]
+{\large \textbf{Submitted by:}}\\[0.5em]
+{\large Mr. Bibek Koirala}\\
+{\large Roll No.: 2657 / 2078}\\[2em]
+{\large \textbf{Submitted to:}}\\
+{\large Department of Computer Science \& Information Technology}\\
+{\large Amrit Campus, Thamel, Kathmandu}\\
+{\large Tribhuvan University}\\[2em]
+{\large March, \the\year}
+\vfill
+\end{titlepage}
+% -------------- Roman page numbering for preface ------------
+\renewcommand{\cftchappresnum}{Chapter\ }
+\renewcommand{\cftchapaftersnum}{:}
+\setlength{\cftchapnumwidth}{7em}
+
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+
+\renewcommand{\contentsname}{Table of Contents}
+\pagenumbering{roman} % start roman numbering
+\setcounter{page}{1}   % start from i
+\newpage
+\include{certificate}
+% ----------------- Table of Contents ------------------
+
+\newpage
+\vspace*{-2cm}
+\addcontentsline{toc}{chapter}{Table of Contents} % Add to ToC
+\centering \tableofcontents
+% -------------------- List of Abbriviations-----------------
+\include{chapter/abb}
+% -------------------- List of Figures --------------------
+\newpage
+% --------- List of Figures / Tables prefix ---------
+\renewcommand{\cftfigpresnum}{Figure~}
+\renewcommand{\cftfigaftersnum}{\quad}
+\setlength{\cftfignumwidth}{3.5cm}
+\vspace*{-2cm}
+\addcontentsline{toc}{chapter}{List of Figures} % Add to ToC
+\listoffigures
+
+% -------------------- List of Tables --------------------
+\newpage
+\renewcommand{\cfttabpresnum}{Table~}
+\renewcommand{\cfttabaftersnum}{\quad}
+\setlength{\cfttabnumwidth}{3.5cm}
+\vspace*{-2cm}
+\addcontentsline{toc}{chapter}{List of Tables}  % Add to ToC
+\listoftables
+
+\newpage
+% -------------------- Main Chapters --------------------
+\pagenumbering{arabic} % switch to 1, 2, 3...
+\setcounter{page}{1}   % start chapter 1 from page 1
+\include{chapter/chapter_1}
+\include{chapter/chapter_2}
+\include{chapter/chapter_3}
+\include{chapter/chapter_4}
+% -------------------- Bibliography / References -------------
+\newpage 
+\addcontentsline{toc}{chapter}{References} % include in TOC 
+\printbibliography[title={\centering References}]
+\clearpage
+\pagenumbering{gobble}
+\include{chapter/Appendix} % Include appendix at the end
+\end{document}
